@@ -1,34 +1,64 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Cotação do Dólar</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simulação Banco NoSQL - Cotação do Dólar</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #e1e1e1;
+      padding: 30px;
+      max-width: 500px;
+      margin: auto;
+    }
+    h2 {
+      color: #333;
+      text-align: center;
+    }
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background: #444;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #666;
+    }
+    #output {
+      background: white;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      font-size: 1.1em;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-  <h1>Cotação do Dólar</h1>
-  <p>Valor atual: <span id="dolar">Carregando...</span></p>
-
-  <h2>Histórico (simulação NoSQL)</h2>
-  <ul id="historico"></ul>
+  <h2>Cotação Dólar (Simulação NoSQL)</h2>
+  <button id="btnMostrar">Ver Última Cotação</button>
+  <div id="output">Clique no botão para ver a cotação</div>
 
   <script>
-    const banco = {
-      "cotacoes": [
-        { "data": "2025-08-20", "valor": 5.12 },
-        { "data": "2025-08-21", "valor": 5.08 },
-        { "data": "2025-08-22", "valor": 5.15 }
+   
+    const bancoDados = {
+      cotacoesDolar: [
+        { dia: "24/08/2025", valor: 5.30 },
+        { dia: "23/08/2025", valor: 5.27 },
+        { dia: "22/08/2025", valor: 5.25 }
       ]
     };
 
-    const cotacoes = banco.cotacoes;
-    const atual = cotacoes[cotacoes.length - 1].valor;
-    document.getElementById('dolar').textContent = 'R$ ' + atual.toFixed(2);
+    const btn = document.getElementById('btnMostrar');
+    const output = document.getElementById('output');
 
-    const lista = document.getElementById('historico');
-    cotacoes.forEach(c => {
-      const item = document.createElement('li');
-      item.textContent = c.data + ': R$ ' + c.valor.toFixed(2);
-      lista.appendChild(item);
+    btn.addEventListener('click', () => {
+      const ultima = bancoDados.cotacoesDolar[0];
+      output.textContent = `Em ${ultima.dia} o dólar estava a R$ ${ultima.valor.toFixed(2)}`;
     });
   </script>
 </body>
